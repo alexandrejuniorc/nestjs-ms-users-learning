@@ -1,5 +1,5 @@
 @BASE_URL = http://localhost:3333
-@USER_ID = 9ada1c01-a14b-46cd-9cf2-a613e9d6d3db
+@USER_ID = dec63b04-b766-44fc-950b-ebdc050bf8ba
 
 # @name create_user
 POST {{BASE_URL}}/users/create

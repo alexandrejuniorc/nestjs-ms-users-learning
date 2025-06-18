@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import {
   Body,
   Controller,
@@ -7,31 +8,35 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { UsersService } from './users.service';
+import { ApiDocGenericPost } from '@/app/common/api-doc-post-generic.decorator';
 
+@ApiTags('Users')
 @Controller('/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('create')
-  create(@Body() user: CreateUserDto) {
-    return this.usersService.create(user);
+  @ApiDocGenericPost('user-create', CreateUserDto)
+  async create(@Body() user: CreateUserDto) {
+    return await this.usersService.create(user);
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  async findAll() {
+    return await this.usersService.findAll();
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() user: UpdateUserDto) {
-    return this.usersService.update(id, user);
+  async update(@Param('id') id: string, @Body() user: UpdateUserDto) {
+    return await this.usersService.update(id, user);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.usersService.delete(id);
+  async delete(@Param('id') id: string) {
+    return await this.usersService.delete(id);
   }
 }

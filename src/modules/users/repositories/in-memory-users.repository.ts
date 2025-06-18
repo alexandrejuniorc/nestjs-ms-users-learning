@@ -3,7 +3,7 @@ import { UpdateUserDto } from '../dtos/update-user.dto';
 import { CreateUserDto } from '../dtos/create-user.dto';
 
 @Injectable()
-export class UsersRepository {
+export class InMemoryUsersRepository {
   private users: { id: string; name: string; email: string }[] = [];
 
   create(user: CreateUserDto) {
