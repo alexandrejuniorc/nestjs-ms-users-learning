@@ -2,13 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { PrismaUsersRepository } from './repositories/prisma-users.repository';
+import { PubSubService } from '../global/pub-sub/pub-sub.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: PrismaUsersRepository) {}
+  constructor(
+    private readonly usersRepository: PrismaUsersRepository,
+    private readonly pubSubService: PubSubService,
+  ) {}
 
-  async create(user: CreateUserDto) {
-    return await this.usersRepository.create(user);
+  async create(data: CreateUserDto) {
+    const user = await this.usersRepository.create(data);
+
+    await this.pubSubService.publish('user-created', user, 'users');
+
+    return user;
   }
 
   async findAll() {

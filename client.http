@@ -6,8 +6,8 @@ POST {{BASE_URL}}/users/create
 Content-Type: application/json
 
 {
-  "name": "John Doe 2",
-  "email": "johndoe2@mail.com"
+  "name": "John Doeee",
+  "email": "johndoeee@mail.com"
 }
 
 ###

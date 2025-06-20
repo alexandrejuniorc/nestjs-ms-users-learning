@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import {
   Body,
   Controller,
@@ -21,8 +20,8 @@ export class UsersController {
 
   @Post('create')
   @ApiDocGenericPost('user-create', CreateUserDto)
-  async create(@Body() user: CreateUserDto) {
-    return await this.usersService.create(user);
+  async create(@Body() data: CreateUserDto) {
+    return await this.usersService.create(data);
   }
 
   @Get()

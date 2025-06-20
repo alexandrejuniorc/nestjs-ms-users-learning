@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Global, Module } from '@nestjs/common';
 import { PubSubService } from './pub-sub.service';
@@ -13,7 +14,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         name: 'REDIS_CLIENT',
         imports: [ConfigModule],
         inject: [ConfigService],
-        useFactory: (configService: ConfigService) => {
+        useFactory: async (configService: ConfigService) => {
           const redisHost = configService.get('REDIS_HOST')!;
           const redisUser = configService.get('REDIS_USER')!;
           const redisPW = configService.get('REDIS_PW')!;
