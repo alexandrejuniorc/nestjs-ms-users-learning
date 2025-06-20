@@ -13,7 +13,7 @@ type CreateUserBodySchema = z.infer<typeof createUserBodySchema>;
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
-  @Post('create')
+  @Post()
   async handle(@Body() data: CreateUserBodySchema) {
     const result = await this.createUserUseCase.execute(data);
 
